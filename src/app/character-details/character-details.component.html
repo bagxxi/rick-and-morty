@@ -1,7 +1,9 @@
-<h2 mat-dialog-title>{{ data.name }}</h2>
+<h2 mat-dialog-title [ngClass]="getStatusClass(data.status)">{{ data.name }}</h2>
     <mat-dialog-content>
       <img [src]="data.image" alt="{{ data.name }}">
+      <p><strong>Life status:</strong> {{ data.status }}</p>
       <p><strong>Species:</strong> {{ data.species }}</p>
+      <p><strong>Gender:</strong> {{ data.gender }}</p>
       <p><strong>Location:</strong> {{ data.location.name }}</p>
       <p><strong>Origin:</strong> {{ data.origin.name }}</p>
     </mat-dialog-content>

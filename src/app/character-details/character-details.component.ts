@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Character } from '../character';
 
 @Component({
   selector: 'app-character-details',
@@ -7,7 +8,24 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./character-details.component.scss']
 })
 export class CharacterDetailsComponent {
-  constructor(public dialogRef: MatDialogRef<CharacterDetailsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
+  character: Character = this.data;
+  constructor(public dialogRef: MatDialogRef<CharacterDetailsComponent>, @Inject(MAT_DIALOG_DATA) public data: Character) {}
+
+  getStatusClass(status: string): string {
+    if (status === 'Alive') {
+      return 'alive';
+    } else if (status === 'Dead') {
+      return 'dead';
+    } else {
+      return 'unknown';
+    }
+  }
+
+  ngOnInit(): void {
+    const status = this.character.status.toLowerCase();
+    const modalContainer = document.getElementsByClassName('mat-dialog-container')[0] as HTMLElement;
+    modalContainer.classList.add(status);
+  }
 
   close(): void {
   }

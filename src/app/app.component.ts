@@ -1,17 +1,10 @@
 import { Component, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Character } from './character';
 
 import { MatDialog } from '@angular/material/dialog';
 import { CharacterDetailsComponent } from '../app/character-details/character-details.component';
 
-interface Character {
-  id: number;
-  name: string;
-  gender: string;
-  image: string;
-  status: string;
-  statusClass: string;
-}
 
 @Component({
   selector: 'app-root',
@@ -48,7 +41,8 @@ export class AppComponent {
 
   showDetails(character: any): void {
     const dialogRef = this.dialog.open(CharacterDetailsComponent, {
-      data: character
+      data: character,
+      panelClass: character.status.toLowerCase()
     });
 
     dialogRef.afterClosed().subscribe(result => {
